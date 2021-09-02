@@ -9,7 +9,7 @@
 
 - 4. When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.
 
-## How can you play this game ?
+## How Can You Play This Game ?
 
 You can use the numbers on your keyboard while playing this game. 
 
@@ -20,5 +20,6 @@ You can use the numbers on your keyboard while playing this game.
  1 | 2 | 3
  
 The playing field is integrated into the number field on the keyboards. You can also see this situation in-game.
+When the First Player hits one of the numbers, it prints 'X' where that number is. When the second player presses one of the numbers, it writes 'O'. The game continues in this way. When the game board is full, the program writes the winner or the draw.
 
 ## Contributors
