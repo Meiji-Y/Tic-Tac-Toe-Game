@@ -34,7 +34,7 @@ int main()
 			
 			
 			
-			while(flag1)
+			while(flag1) // flag=1 => game continues flag=0 => game finish
 			{
 				printf("Player %d's Turn ... \n",playernum);
 				printf("Select the number that you want to put X or O ...\n");
@@ -47,7 +47,7 @@ int main()
 				
 				if(xox_changer =='X')
 				{
-					xox_changer='O';
+					xox_changer='O'; 
 					playernum=2;	
 				}
 				else
@@ -79,7 +79,7 @@ int main()
 	return 0;
 }
 
-void prep_board()
+void prep_board() 	//Shows which keys the game is played with.
 {
 	int board[3][3]={{7,8,9},{4,5,6},{1,2,3}};
 	
@@ -95,9 +95,9 @@ void prep_board()
 	
 }
 
-void put_board(int number, char xox_changer,int* x, int* y,char chrboard[3][3])
+void put_board(int number, char xox_changer,int* x, int* y,char chrboard[3][3]) 
 {
-	
+	//Calculates which numbers come in which indexes
 
 
 	if(number == 7)
@@ -140,8 +140,7 @@ void put_board(int number, char xox_changer,int* x, int* y,char chrboard[3][3])
 		*x=2;
 		*y=1;
 	}
-	else if(number == 3
-	)
+	else if(number == 3)
 	{
 		*x=2;
 		*y=2;
@@ -155,8 +154,8 @@ void put_board(int number, char xox_changer,int* x, int* y,char chrboard[3][3])
 }
 
 
-void display_board(char xox_changer,int* x,int* y,char chrboard[3][3])
-{
+void display_board(char xox_changer,int* x,int* y,char chrboard[3][3])   	//prints the current state of the game board
+{ 				
 				
 			chrboard[*x][*y]=xox_changer; 
 		
@@ -171,7 +170,7 @@ void display_board(char xox_changer,int* x,int* y,char chrboard[3][3])
 		}
 }
 
-void win_check(int* x,int* y,int* flag1 ,char chrboard[3][3])
+void win_check(int* x,int* y,int* flag1 ,char chrboard[3][3])		//checks who wins
 {
 	
 	if((chrboard[0][0]=='X' && chrboard[0][1]=='X' && chrboard[0][2]=='X') || (chrboard[1][0]=='X' && chrboard[1][1]=='X' && chrboard[1][2]=='X') || (chrboard[2][0]=='X' && chrboard[2][1]=='X' && chrboard[2][2]=='X') || (chrboard[0][0]=='X' && chrboard[1][0]=='X' && chrboard[2][0]=='X') || (chrboard[0][1]=='X' && chrboard[1][1]=='X' && chrboard[2][1]=='X') || (chrboard[0][2]=='X' && chrboard[1][2]=='X' && chrboard[2][2]=='X') || (chrboard[0][0]=='X' && chrboard[1][1]=='X' && chrboard[2][2]=='X') || (chrboard[0][2]=='X' && chrboard[1][1]=='X' && chrboard[2][0]=='X') )
