@@ -23,3 +23,4 @@ The playing field is integrated into the number field on the keyboards. You can 
 When the First Player hits one of the numbers, it prints 'X' where that number is. When the second player presses one of the numbers, it writes 'O'. The game continues in this way. When the game board is full, the program writes the winner or the draw.
 
 ## Contributors
+@ipekiscelebi İpek İşçelebi
