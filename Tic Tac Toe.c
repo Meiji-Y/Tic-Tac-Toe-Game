@@ -3,8 +3,8 @@
 
 void prep_board();
 void put_board(int,char,int*,int*,char[3][3]);
-void display_board(char,int*,int*,char[3][3]);
-void win_check(int*,int*,int*,int*,char[3][3]);
+void display_board(char*,int,int,char[3][3],int*,int*);
+void win_check(int*,int*,int*,int*,char[3][3],int*);
 
 
 int main()
@@ -20,7 +20,7 @@ int main()
 
 	scanf("%d",&gametype);
 
-    int flag1=1;
+    int flag1=1,adder=0;
     int count=0;
 	if(gametype==1)
 	{
@@ -44,39 +44,29 @@ int main()
 				scanf("%d",&number);
 
 				put_board(number,xox_changer,&x,&y,chrboard);
-				display_board(xox_changer,&x,&y,chrboard);
-				win_check(&x,&y,&flag1,&count,chrboard);
+				display_board(&xox_changer,x,y,chrboard,&playernum,&adder);
+				win_check(&x,&y,&flag1,&count,chrboard,&adder);
 
 
-				if(xox_changer =='X')
-				{
-					xox_changer='O';
-					playernum=2;
-				}
-				else
-				{
-					xox_changer='X';
-					playernum=1;
-				}
-
+			
 				if(flag1==2)
 				{
 					goto start;
 				}
 
-			}
+			 }
 
-	}
-	else if(gametype==3)
-	{
-		flag1=0;
-	}
-	else
-	{
-		printf("\n You entered invalid number...");
-		printf("\n Please enter 1 or 2 ...");
-		goto start;
-	}
+				}
+				else if(gametype==3)
+				{
+					flag1=0;
+				}
+				else
+				{
+					printf("\n You entered invalid number...");
+					printf("\n Please enter 1 or 2 ...");
+					goto start;
+				}
 
 
 
@@ -158,23 +148,61 @@ void put_board(int number, char xox_changer,int* x, int* y,char chrboard[3][3])
 }
 
 
-void display_board(char xox_changer,int* x,int* y,char chrboard[3][3])   	//prints the current state of the game board
+void display_board(char *xox_changer,int x,int y,char chrboard[3][3],int *playernum,int *adder)   	//prints the current state of the game board
 {
 
-			chrboard[*x][*y]=xox_changer;
+		
+			
+			if(chrboard[x][y]!='X' && chrboard[x][y]!='O'){
+					chrboard[x][y]=*xox_changer;
+					for(int i=0;i<3;i++)
+				{
+					for(int j=0;j<3;j++)
+					{
+						printf("    % c",chrboard[i][j]);
+					}
+					printf("\n");
+					printf("\n");
+				}
+				
+					if(*xox_changer =='X')
+				{
+					*xox_changer='O';
+					*playernum=2;
+				}
+				else
+				{
+					*xox_changer='X';
+					*playernum=1;
+				}
 
-	for(int i=0;i<3;i++)
-		{
-			for(int j=0;j<3;j++)
-			{
-				printf("    % c",chrboard[i][j]);
 			}
-			printf("\n");
-			printf("\n");
-		}
+			else{
+					for(int i=0;i<3;i++)
+				{
+					for(int j=0;j<3;j++)
+					{
+						printf("    % c",chrboard[i][j]);
+					}
+					printf("\n");
+					printf("\n");
+						
+					if(*xox_changer =='X'){
+						*xox_changer='X';
+						*playernum=1;
+					}
+					else{
+						*xox_changer='O';
+						*playernum=2;
+					}
+						
+				}
+				(*adder)++;				
+			}
+
 }
 
-void win_check(int* x,int* y,int* flag1 ,int* count ,char chrboard[3][3])		//checks who wins
+void win_check(int* x,int* y,int* flag1 ,int* count ,char chrboard[3][3],int* adder)		//checks who wins
 {
 
 	if((chrboard[0][0]=='X' && chrboard[0][1]=='X' && chrboard[0][2]=='X') || (chrboard[1][0]=='X' && chrboard[1][1]=='X' && chrboard[1][2]=='X') || (chrboard[2][0]=='X' && chrboard[2][1]=='X' && chrboard[2][2]=='X') || (chrboard[0][0]=='X' && chrboard[1][0]=='X' && chrboard[2][0]=='X') || (chrboard[0][1]=='X' && chrboard[1][1]=='X' && chrboard[2][1]=='X') || (chrboard[0][2]=='X' && chrboard[1][2]=='X' && chrboard[2][2]=='X') || (chrboard[0][0]=='X' && chrboard[1][1]=='X' && chrboard[2][2]=='X') || (chrboard[0][2]=='X' && chrboard[1][1]=='X' && chrboard[2][0]=='X') )
@@ -186,13 +214,13 @@ void win_check(int* x,int* y,int* flag1 ,int* count ,char chrboard[3][3])		//che
 	{
 		*flag1=2;
 		printf("\n PLAYER 2 WON THE GAME ... \a");
-	}
+ }
 	else{
         (*count)++;
 
 	}
 
-    if(*count==9){
+    if((*count)==(9+(*adder))){
                     printf("TIE Nobody Won...\n\a");
                     *flag1=2;
                 }
